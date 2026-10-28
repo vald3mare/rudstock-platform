@@ -9,6 +9,7 @@ type Kind string
 
 const (
 	KindInvalidInput Kind = "invalid_input"
+	KindUnauthorized Kind = "unauthorized" // не знаем, кто это: нет токена, неверный пароль
 	KindNotFound     Kind = "not_found"
 	KindForbidden    Kind = "forbidden"
 	KindConflict     Kind = "conflict"
@@ -55,6 +56,15 @@ func NotFound(slug string, msg string, err error) *Error {
 func InvalidInput(slug string, msg string, err error) *Error {
 	return &Error{
 		Kind: KindInvalidInput,
+		Slug: slug,
+		Msg:  msg,
+		err:  err,
+	}
+}
+
+func Unauthorized(slug string, msg string, err error) *Error {
+	return &Error{
+		Kind: KindUnauthorized,
 		Slug: slug,
 		Msg:  msg,
 		err:  err,

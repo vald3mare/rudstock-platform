@@ -8,7 +8,7 @@ import (
 	"log/slog"
 	"net/http"
 
-	"github.com/vald3mare/Rudstock/catalog/internal/platform/errs"
+	"github.com/vald3mare/rudstock-platform/errs"
 )
 
 // ErrorResponse это тело ответа при ошибке. Наружу уходят только слаг и сообщение:
@@ -24,6 +24,8 @@ func statusFromKind(kind errs.Kind) int {
 	switch kind {
 	case errs.KindInvalidInput:
 		return http.StatusBadRequest
+	case errs.KindUnauthorized:
+		return http.StatusUnauthorized
 	case errs.KindNotFound:
 		return http.StatusNotFound
 	case errs.KindForbidden:
